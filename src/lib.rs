@@ -1,3 +1,6 @@
+mod flags_register;
+use flags_register::FlagsRegister;
+
 #[derive(Default)]
 pub struct Registers {
     a: u8,
@@ -5,7 +8,7 @@ pub struct Registers {
     c: u8,
     d: u8,
     e: u8,
-    f: u8,
+    f: FlagsRegister,
     h: u8,
     l: u8,
 }
@@ -23,7 +26,9 @@ impl Registers {
 
 #[cfg(test)]
 mod register_tests {
+    use FlagsRegister;
     use Registers;
+
     #[test]
     fn getting_16_bit_from_b_and_c() {
         let regs = Registers {
@@ -40,5 +45,17 @@ mod register_tests {
         regs.set_bc(0xAABB);
         assert_eq!(regs.b, 0xAA);
         assert_eq!(regs.c, 0xBB);
+    }
+
+    #[test]
+    fn using_flags_register() {
+        let mut regs = Registers {
+            f: FlagsRegister {
+                zero: true,
+                ..Default::default()
+            },
+            ..Default::default()
+        };
+        assert_eq!(u8::from(regs.f), 0b10000000);
     }
 }
