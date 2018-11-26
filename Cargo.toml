@@ -1,0 +1,6 @@
+[package]
+name = "gg-gb"
+version = "0.1.0"
+authors = ["Ömür Özkir <oemuer.oezkir@gmail.com>"]
+
+[dependencies]
