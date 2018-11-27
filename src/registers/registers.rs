@@ -48,7 +48,7 @@ mod register_tests {
 
     #[test]
     fn using_flags_register() {
-        let mut regs = Registers {
+        let regs = Registers {
             f: FlagsRegister {
                 zero: true,
                 ..Default::default()
