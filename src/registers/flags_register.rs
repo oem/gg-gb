@@ -40,7 +40,7 @@ impl std::convert::From<u8> for FlagsRegister {
 
 #[cfg(test)]
 mod flags_register_tests {
-    use FlagsRegister;
+    use registers::flags_register::FlagsRegister;
 
     #[test]
     fn convert_zero_flag_into_u8() {
