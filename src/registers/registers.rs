@@ -1,4 +1,3 @@
-// mod flags_register;
 use registers::flags_register::FlagsRegister;
 
 #[derive(Default)]
