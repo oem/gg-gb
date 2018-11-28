@@ -21,6 +21,10 @@ impl Registers {
         self.b = ((value & 0xFF00) >> 8) as u8;
         self.c = (value & 0xFF) as u8;
     }
+
+    fn get_de(&self) -> u16 {
+        (self.d as u16) << 8 | self.e as u16
+    }
 }
 
 #[cfg(test)]
@@ -44,5 +48,15 @@ mod register_tests {
         regs.set_bc(0xAABB);
         assert_eq!(regs.b, 0xAA);
         assert_eq!(regs.c, 0xBB);
+    }
+
+    #[test]
+    fn getting_16_bit_from_d_and_e() {
+        let regs = Registers {
+            d: 0xF0,
+            e: 0x0A,
+            ..Default::default()
+        };
+        assert_eq!(regs.get_de(), 0xF00A);
     }
 }

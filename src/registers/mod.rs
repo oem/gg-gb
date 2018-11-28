@@ -19,5 +19,4 @@ mod register_tests {
         };
         assert_eq!(u8::from(regs.f), 0b10000000);
     }
-
 }
