@@ -25,6 +25,11 @@ impl Registers {
     fn get_de(&self) -> u16 {
         (self.d as u16) << 8 | self.e as u16
     }
+
+    pub fn set_de(&mut self, value: u16) {
+        self.d = ((value & 0xFF00) >> 8) as u8;
+        self.e = (value & 0xFF) as u8;
+    }
 }
 
 #[cfg(test)]
@@ -58,5 +63,13 @@ mod register_tests {
             ..Default::default()
         };
         assert_eq!(regs.get_de(), 0xF00A);
+    }
+
+    #[test]
+    fn writing_16_bit_value_into_d_and_e() {
+        let mut regs: Registers = Default::default();
+        regs.set_de(0xAABB);
+        assert_eq!(regs.d, 0xAA);
+        assert_eq!(regs.e, 0xBB);
     }
 }
