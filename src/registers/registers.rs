@@ -33,8 +33,7 @@ impl Registers {
 }
 
 #[cfg(test)]
-mod register_tests {
-    use registers::flags_register::FlagsRegister;
+mod tests {
     use registers::registers::Registers;
 
     #[test]

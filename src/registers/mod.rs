@@ -4,7 +4,7 @@ mod registers;
 pub use registers::registers::Registers;
 
 #[cfg(test)]
-mod register_tests {
+mod tests {
     use registers::flags_register::FlagsRegister;
     use registers::Registers;
 

@@ -39,7 +39,7 @@ impl std::convert::From<u8> for FlagsRegister {
 }
 
 #[cfg(test)]
-mod flags_register_tests {
+mod tests {
     use registers::flags_register::FlagsRegister;
 
     #[test]
