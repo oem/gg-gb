@@ -32,4 +32,11 @@ impl CPU {
 }
 
 #[cfg(test)]
-mod tests {}
+mod tests {
+    use registers::Registers;
+
+    #[test]
+    fn add_to_c() {
+        let mut regs: Registers = Default::default();
+    }
+}
