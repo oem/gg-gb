@@ -1,4 +1,8 @@
-struct CPU {}
+use registers::Registers;
+
+struct CPU {
+    registers: Registers,
+}
 
 enum Instruction {
     ADD(ArithmeticTarget),
@@ -33,10 +37,18 @@ impl CPU {
 
 #[cfg(test)]
 mod tests {
+    use instructions::{ArithmeticTarget, Instruction, CPU};
     use registers::Registers;
 
     #[test]
-    fn add_to_c() {
-        let mut regs: Registers = Default::default();
+    fn add_c_to_a() {
+        let regs = Registers {
+            a: 0,
+            c: 12,
+            ..Default::default()
+        };
+        let mut cpu = CPU { registers: regs };
+        cpu.execute(Instruction::ADD(ArithmeticTarget::C));
+        assert_eq!(cpu.registers.a, 12);
     }
 }
