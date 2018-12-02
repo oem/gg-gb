@@ -25,13 +25,21 @@ impl CPU {
             Instruction::ADD(target) => {
                 match target {
                     ArithmeticTarget::C => {
-                        // TODO: implement ADD on register C
+                        let value = self.registers.c;
+                        let new_value = self.add(value);
+                        self.registers.a = new_value;
                     }
                     _ => { /* TODO: implement more targets */ }
                 }
             }
             _ => { /* TODO: implement more instructions */ }
         }
+    }
+
+    fn add(&mut self, value: u8) -> u8 {
+        let (new_value, did_overflow) = self.registers.a.overflowing_add(value);
+        // TODO set flags
+        new_value
     }
 }
 
