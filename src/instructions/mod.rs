@@ -59,4 +59,20 @@ mod tests {
         cpu.execute(Instruction::ADD(ArithmeticTarget::C));
         assert_eq!(cpu.registers.a, 12);
     }
+
+    #[test]
+    fn add_sets_the_flags_to_false() {
+        let regs = Registers {
+            a: 0,
+            c: 12,
+            ..Default::default()
+        };
+        let mut cpu = CPU { registers: regs };
+        cpu.execute(Instruction::ADD(ArithmeticTarget::C));
+
+        assert_eq!(cpu.registers.f.zero, false);
+        assert_eq!(cpu.registers.f.substract, false);
+        assert_eq!(cpu.registers.f.half_carry, false);
+        assert_eq!(cpu.registers.f.carry, false);
+    }
 }
