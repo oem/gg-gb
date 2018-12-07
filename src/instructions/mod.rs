@@ -2,6 +2,18 @@ use registers::Registers;
 
 struct CPU {
     registers: Registers,
+    pc: u16,
+    bus: MemoryBus,
+}
+
+struct MemoryBus {
+    memory: [u8; 0xFFFF],
+}
+
+impl MemoryBus {
+    fn read_byte(&self, address: u16) -> u8 {
+        self.memory[address as usize]
+    }
 }
 
 enum Instruction {
@@ -48,7 +60,7 @@ impl CPU {
 
 #[cfg(test)]
 mod tests {
-    use instructions::{ArithmeticTarget, Instruction, CPU};
+    use instructions::{ArithmeticTarget, Instruction, MemoryBus, CPU};
     use registers::Registers;
 
     #[test]
@@ -58,6 +70,10 @@ mod tests {
                 a: 0,
                 c: 12,
                 ..Default::default()
+            },
+            pc: 0,
+            bus: MemoryBus {
+                memory: [0; 0xFFFF],
             },
         };
         cpu.execute(Instruction::ADD(ArithmeticTarget::C));
@@ -71,6 +87,10 @@ mod tests {
                 a: 0,
                 c: 12,
                 ..Default::default()
+            },
+            pc: 0,
+            bus: MemoryBus {
+                memory: [0; 0xFFFF],
             },
         };
         cpu.execute(Instruction::ADD(ArithmeticTarget::C));
@@ -89,6 +109,10 @@ mod tests {
                 c: 0b00001111,
                 ..Default::default()
             },
+            pc: 0,
+            bus: MemoryBus {
+                memory: [0; 0xFFFF],
+            },
         };
         cpu.execute(Instruction::ADD(ArithmeticTarget::C));
 
@@ -105,6 +129,10 @@ mod tests {
                 a: 0b11111111,
                 c: 0b00000001,
                 ..Default::default()
+            },
+            pc: 0,
+            bus: MemoryBus {
+                memory: [0; 0xFFFF],
             },
         };
         cpu.execute(Instruction::ADD(ArithmeticTarget::C));
