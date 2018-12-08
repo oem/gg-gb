@@ -20,6 +20,12 @@ enum Instruction {
     ADD(ArithmeticTarget),
 }
 
+impl Instruction {
+    fn from_byte(b: u8) -> Option<Instruction> {
+        None
+    }
+}
+
 enum ArithmeticTarget {
     A,
     B,
@@ -47,6 +53,8 @@ impl CPU {
             _ => { /* TODO: implement more instructions */ }
         }
     }
+
+    fn step(&mut self) {}
 
     fn add(&mut self, value: u8) -> u8 {
         let (new_value, did_overflow) = self.registers.a.overflowing_add(value);
