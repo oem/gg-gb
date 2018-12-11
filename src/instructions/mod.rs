@@ -21,7 +21,7 @@ enum Instruction {
 }
 
 impl Instruction {
-    fn from_byte(b: u8) -> Option<Instruction> {
+    fn from_byte(_b: u8) -> Option<Instruction> {
         None
     }
 }
