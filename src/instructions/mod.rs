@@ -38,7 +38,7 @@ enum ArithmeticTarget {
 }
 
 impl CPU {
-    fn execute(&mut self, instruction: Instruction) {
+    fn execute(&mut self, instruction: Instruction) -> u16 {
         match instruction {
             Instruction::ADD(target) => {
                 match target {
@@ -52,9 +52,20 @@ impl CPU {
             }
             _ => { /* TODO: implement more instructions */ }
         }
+        0
     }
 
-    fn step(&mut self) {}
+    fn step(&mut self) {
+        let mut instruction_byte = self.bus.read_byte(self.pc);
+
+        let next_pc = if let Some(instruction) = Instruction::from_byte(instruction_byte) {
+            self.execute(instruction)
+        } else {
+            panic!("Unknown instruction found for : 0x{:x}", instruction_byte);
+        };
+
+        self.pc = next_pc;
+    }
 
     fn add(&mut self, value: u8) -> u8 {
         let (new_value, did_overflow) = self.registers.a.overflowing_add(value);
