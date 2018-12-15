@@ -18,12 +18,21 @@ impl MemoryBus {
 
 enum Instruction {
     ADD(ArithmeticTarget),
+    INC(IncDecTarget),
 }
 
 impl Instruction {
-    fn from_byte(_b: u8) -> Option<Instruction> {
-        None
+    fn from_byte(byte: u8) -> Option<Instruction> {
+        match byte {
+            0x02 => Some(Instruction::INC(IncDecTarget::BC)),
+            _ => None,
+        }
     }
+}
+
+enum IncDecTarget {
+    BC,
+    DE,
 }
 
 enum ArithmeticTarget {
@@ -46,7 +55,14 @@ impl CPU {
                         let value = self.registers.c;
                         let new_value = self.add(value);
                         self.registers.a = new_value;
+                        self.pc.wrapping_add(1);
                     }
+                    _ => { /* TODO: implement more targets */ }
+                }
+            }
+            Instruction::INC(target) => {
+                match target {
+                    IncDecTarget::BC => {}
                     _ => { /* TODO: implement more targets */ }
                 }
             }
@@ -147,4 +163,7 @@ mod tests {
 
         assert_eq!(cpu.registers.f.carry, true);
     }
+
+    #[test]
+    fn inc_bc_will_increase() {}
 }
