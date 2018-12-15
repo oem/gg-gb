@@ -22,7 +22,7 @@ impl Registers {
         self.c = (value & 0xFF) as u8;
     }
 
-    fn get_de(&self) -> u16 {
+    pub fn get_de(&self) -> u16 {
         (self.d as u16) << 8 | self.e as u16
     }
 
