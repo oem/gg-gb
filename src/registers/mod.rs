@@ -17,6 +17,6 @@ mod tests {
             },
             ..Default::default()
         };
-        assert_eq!(u8::from(regs.f), 0b10000000);
+        assert_eq!(u8::from(regs.f), 0b1000_0000);
     }
 }

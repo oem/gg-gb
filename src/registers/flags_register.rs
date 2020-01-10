@@ -50,7 +50,7 @@ mod tests {
             half_carry: false,
             carry: false,
         };
-        assert_eq!(0b10000000, u8::from(flag_reg));
+        assert_eq!(0b1000_0000, u8::from(flag_reg));
     }
 
     #[test]
@@ -61,7 +61,7 @@ mod tests {
             half_carry: false,
             carry: false,
         };
-        assert_eq!(0b01000000, u8::from(flag_reg));
+        assert_eq!(0b0100_0000, u8::from(flag_reg));
     }
 
     #[test]
@@ -72,7 +72,7 @@ mod tests {
             half_carry: true,
             carry: false,
         };
-        assert_eq!(0b00100000, u8::from(flag_reg));
+        assert_eq!(0b0010_0000, u8::from(flag_reg));
     }
 
     #[test]
@@ -83,7 +83,7 @@ mod tests {
             half_carry: false,
             carry: true,
         };
-        assert_eq!(0b00010000, u8::from(flag_reg));
+        assert_eq!(0b0001_0000, u8::from(flag_reg));
     }
 
     #[test]
@@ -94,12 +94,12 @@ mod tests {
             half_carry: false,
             carry: true,
         };
-        assert_eq!(0b10010000, u8::from(flag_reg));
+        assert_eq!(0b1001_0000, u8::from(flag_reg));
     }
 
     #[test]
     fn convert_u8_into_zero_flag() {
-        let byte_flags: u8 = 0b10000000;
+        let byte_flags: u8 = 0b1000_0000;
         assert_eq!(
             FlagsRegister {
                 zero: true,
@@ -111,7 +111,7 @@ mod tests {
 
     #[test]
     fn convert_u8_into_substract_flag() {
-        let byte_flags: u8 = 0b01000000;
+        let byte_flags: u8 = 0b0100_0000;
         assert_eq!(
             FlagsRegister {
                 substract: true,
@@ -123,7 +123,7 @@ mod tests {
 
     #[test]
     fn convert_u8_into_half_carry_flag() {
-        let byte_flags: u8 = 0b00100000;
+        let byte_flags: u8 = 0b0010_0000;
         assert_eq!(
             FlagsRegister {
                 half_carry: true,
@@ -135,7 +135,7 @@ mod tests {
 
     #[test]
     fn convert_u8_into_carry_flag() {
-        let byte_flags: u8 = 0b00010000;
+        let byte_flags: u8 = 0b0001_0000;
         assert_eq!(
             FlagsRegister {
                 carry: true,

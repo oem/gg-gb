@@ -140,8 +140,8 @@ mod tests {
     fn add_with_nibble_overflow_sets_half_carry() {
         let mut cpu = CPU {
             registers: Registers {
-                a: 0b00000001,
-                c: 0b00001111,
+                a: 0b0000_0001,
+                c: 0b0000_1111,
                 ..Default::default()
             },
             pc: 0,
@@ -161,8 +161,8 @@ mod tests {
     fn add_with_overflow_sets_carry() {
         let mut cpu = CPU {
             registers: Registers {
-                a: 0b11111111,
-                c: 0b00000001,
+                a: 0b1111_1111,
+                c: 0b0000_0001,
                 ..Default::default()
             },
             pc: 0,
